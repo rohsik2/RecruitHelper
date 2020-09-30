@@ -1,0 +1,44 @@
+{% extends 'army_vacation/base.html' %}
+
+{% block content %}
+
+<a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
+<a href="{% url 'calendar' %}" class="top-menu"><span class="glyphicon glyphicon-calendar"></span></a>
+    {% if user.is_authenticated %}
+<iframe src="https://calendar.google.com/calendar/embed?src=rohsik2%40gmail.com&ctz=Asia%2FSeoul" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+    {% endif %}
+    <div class="content container">
+            <div class="row">
+                <div class="col-md-8" >
+                <script type = "text/javascript" > 
+                    // JavaScript program to illustrate 
+                    // calculation of no. of days between two date 
+
+                    // To set two dates to two variables 
+                    var date1 = new Date(); 
+                    var date2 = new Date("06/16/2021");
+                    var date3 = new Date("02/03/2021");//이우진 전역날
+
+                    // To calculate the time difference of two dates 
+                    var Difference_In_Time = date2.getTime() - date1.getTime(); //나
+                    var Difference_In_Time2 = date3.getTime() - date1.getTime();//ㄱㄱㅇ
+
+                    // To calculate the no. of days between two dates 
+                    var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24); //나
+                    var Difference_In_Days2 = Difference_In_Time2 / (1000 * 3600 * 24); //ㄱㄱㅇ
+                    
+                    var Difference_In_Time = date2.getTime() - date1.getTime(); 
+                    var Difference_In_Time2 = date3.getTime() - date1.getTime(); 
+
+                    // To calculate the no. of days between two dates 
+                    var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24); 
+                    
+                    //To display the final no. of days (result) 
+                    document.write("<h3>현욱님 남은날 : "+ Difference_In_Days + "</h1>");
+                    document.write("<h3>이우진 남은날 : "+ Difference_In_Days2 + "</h1>");
+                    
+                </script> 
+                </div>
+            </div>
+		</div>
+{% endblock %}

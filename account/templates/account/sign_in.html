@@ -1,0 +1,14 @@
+{% extends 'army_vacation/base.html' %}
+
+{% block content %}
+<form method="POST" class="post-form">
+    {% csrf_token %}
+    <style>
+        select {
+        display: unset;
+    }
+    </style>
+    {{ form.as_p }}
+    <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+{% endblock %}

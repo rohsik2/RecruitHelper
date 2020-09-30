@@ -1,0 +1,10 @@
+{% extends 'army_vacation/base.html' %}
+
+<a href="{% url 'post_new' %}" class="top-menu"><i class="material-icons">edit</i></a>
+{% block content%}
+	<h3>전파사항 추가</h3>
+	<form method="POST" class="post-form">{% csrf_token %}
+		{{ form.as_p }}
+		<button type="submit" class="save btn btn-default">Save</button>
+	</form>
+{% endblock %}
