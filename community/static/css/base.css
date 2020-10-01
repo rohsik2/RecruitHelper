@@ -1,41 +1,57 @@
-.header{
-    font-family: 'Black Han Sans', sans-serif;
-    background:#f0e6e5;
-    width:100%;
-    height: 120px;
-    position: fixed;
+/* Custom Stylesheet */
+/**
+ * Use this file to override Materialize files so you can update
+ * the core Materialize files in the future
+ *
+ * Made By MaterializeCSS.com
+ */
+
+nav ul a,
+nav .brand-logo {
+  color: #444 !important;
+}
+
+p {
+  line-height: 2rem;
+}
+
+.sidenav-trigger {
+  color: #26a69a;
+}
+
+.parallax-container {
+  min-height: 380px;
+  line-height: 0;
+  height: auto;
+  color: rgba(255,255,255,.9);
+}
+  .parallax-container .section {
+    width: 100%;
+  }
+
+@media only screen and (max-width : 992px) {
+  .parallax-container .section {
+    position: absolute;
+    top: 40%;
+  }
+  #index-banner .section {
+    top: 10%;
+  }
+}
+
+@media only screen and (max-width : 600px) {
+  #index-banner .section {
     top: 0;
-    left: 0;
-    right: 0;
-}
-.material-icons.md-48 { font-size: 48px; }
-
-
-
-.title{
+  }
 }
 
-.logo{
+.icon-block {
+  padding: 0 15px;
+}
+.icon-block .material-icons {
+  font-size: inherit;
 }
 
-.banner img{
-    width:100%
-}
-
-.h1{
-    font-size:1.8em;
-}
-.h2{
-    align-content:left;
-    font-size : 10px;
-}
-.content{
-    margin-top : 140px;
-}
-.footer{
-    
-}
-
-select{
-    display : unset; !important
+footer.page-footer {
+  margin: 0;
 }

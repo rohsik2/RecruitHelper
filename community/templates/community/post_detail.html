@@ -2,20 +2,51 @@
 
 {% block content %}
     <div class="post">
-        {% if post.published_date %}
+        <div class="row">
+		
+        <div class="col offset-l2 l8 s12">
+            <h1>{{ post.title }}</h1>
+            <p>{{ post.text|linebreaks }}</p>
+
+            {% if post.published_date %}
             <div class="date">
                 {{ post.published_date }}
             </div>
-        {% endif %}
-		{% if user.is_authenticated %}
-			<a class="btn btn-default" href="{% url 'post_edit' pk=post.pk %}"><i class="material-icons">edit</i></a>
-		{% endif %}
-		<h1>{{ post.title }}</h1>
-        <p>{{ post.text|linebreaks }}</p>
-        {% for comment in comments %}
-        <p>
-            {{comment.text}}
-        </p>
-        {% endfor %}
+            {% endif %}
+            {% if user.is_authenticated %}
+                <a class="btn btn-default" href="{% url 'post_edit' pk=post.pk %}"><i class="material-icons">edit</i></a>
+            {% endif %}
+        </div>
+            
+        <div class="col offset-l2 l8 s12">
+            {% if user.is_authenticated %}
+            <form method="POST" class="post-form">{% csrf_token %}
+            {% for field in form %}
+                <div class = form-group {% if field.errors|length > 0 %}has-error{%endif %}">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    <input name="{{ field.html_name }}" id="{{ field.id_for_lable }}" 
+                           class="col form-control s12" type="{{ field.field.widget.input_type }}" value="{{ field.value|default_if_none:'' }}">
+                    {% for error in field.errors %}
+                        <label class="control-label" for="{{ field.id_for_label }}">{{ error }}</label>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+                <div class="form-actions">
+                    <button class="btn btn-primary btn-large" type="submit">댓글달기</button>
+                </div>
+            </form>
+            {% endif %}
+        </div>
+            
+        <div class='col offset-l2 l8 s12'>
+            {% for comment in comments %}
+            <div class="divider"></div>
+            <p>
+                {{comment.text}}
+            </p>
+            {% endfor %}
+        </div>
+        
+        </div>
 	</div>
 {% endblock %}
