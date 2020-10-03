@@ -1,2 +1,3 @@
 /RecruitHelper/settings.py
 db.sqlite3
+/RecruitHelper/__pycache__/

@@ -71,3 +71,6 @@ def left_day(request):
     d_delta = d_start-d_fin
     return render(request, 'community/left_day.html', {'leftday': d_delta})
 
+def cutline(request):
+    data = [100,200,100,100,120,130,152,164,132]
+    return render(request, 'community/cutline.html', {'data':data})
