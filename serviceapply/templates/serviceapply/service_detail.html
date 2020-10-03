@@ -1,0 +1,44 @@
+{% extends 'community/base.html' %}
+
+            
+{% block content %}
+<div class="row">
+    <div class="col offset-l2 l8 s12">
+        <h1>{{ service.title }}</h1>
+        <p>{{ service.text|linebreaks }}</p>
+    </div>
+    <script>
+var dates = {{dates}};
+var datas = {{datas}};
+
+var point_data = [];
+        
+for(var data in datas){
+    point_data.push({x : dates[data],  y : datas[data]})
+}
+
+window.onload = function () {
+
+    
+var chart = new CanvasJS.Chart("chartContainer", {
+    animationEnabled: true,
+    theme: "light2",
+    title:{
+        text: "Simple Line Chart"
+    },
+    data: [{        
+        type: "line",
+        indexLabelFontSize: 16,
+        dataPoints: point_data
+    }]
+});
+chart.render();
+
+}
+
+    </script>
+    <div class="col s12">
+        <div id="chartContainer" style="height: 370px; width: 100%; margin-top:20px;"></div>
+        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    </div>
+{% endblock %}

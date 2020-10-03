@@ -20,6 +20,7 @@ from django.shortcuts import redirect
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('community/', include('community.urls')),
+    path('apply/', include('serviceapply.urls')),
     path('account/', include('account.urls')),
     path('', lambda request: redirect('community/', permanent=False)),
 ]
