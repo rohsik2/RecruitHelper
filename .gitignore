@@ -2,3 +2,11 @@
 db.sqlite3
 /RecruitHelper/__pycache__/
 /RecruitHelper/wsgi.py
+*.pyc
+goorm.manifest
+*.pyc
+__pycache__
+myvenv
+db.sqlite3
+/static
+.DS_Store
