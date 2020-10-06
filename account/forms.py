@@ -1,8 +1,8 @@
 from django import forms
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
-from django.contrib.auth import authenticate, login, logout, get_user_model
+# from django.contrib.auth import authenticate, login, logout, get_user_model
+from .models import User
 
-from .models import *
 
 class UserCreationForm(forms.ModelForm):
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput)

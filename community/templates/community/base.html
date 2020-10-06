@@ -23,7 +23,7 @@
             {% if user.is_authenticated %}
               <a href="/account"><span class="black-text name">{{user.name}}님</span></a>
             {% else %}
-                <a href="/account/login"><span class="white-text name">로그인</span></a>
+                <a href="/account/login"><span class="black-text name">로그인</span></a>
             {% endif %}
               </li>
             <li><a href = "{% url 'post_list' %}" class="active">복무후기</a></li>

@@ -1,8 +1,13 @@
 from django.contrib import admin
-
-# Register your models here.
 from .models import Service, Cutline
 
 
-admin.site.register(Service)
-admin.site.register(Cutline)
+class CutlineInline(admin.TabularInline):
+    model = Cutline
+
+
+class ServiceAdmin(admin.ModelAdmin):
+    inlines = (CutlineInline,)
+
+
+admin.site.register(Service, ServiceAdmin)
