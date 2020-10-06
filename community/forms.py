@@ -4,7 +4,7 @@ from .models import Comment
 from serviceapply.models import Service
 
 class PostForm(forms.ModelForm):
-    choice = forms.ChoiceField(
+    service = forms.ChoiceField(
         choices=[(choice.pk, choice) for choice in Service.objects.all()])
     class Meta:
         model = Post
