@@ -42,7 +42,7 @@ def post_new(request):
         if form.is_valid() and request.user.is_authenticated:
             post = form.save(commit=False)
             post.published_date = timezone.now()
-            post.service = form.service
+            post.service = form.cleaned_data['service']
             post.author = request.user
             post.save()
             return redirect('post_list')

@@ -43,7 +43,7 @@ class User(AbstractBaseUser):
         help_text="Please use the following format: <em>YYYY-MM-DD</em>.")
     date_of_join = models.DateField(
         help_text="Please use the following format: <em>YYYY-MM-DD</em>.")
-    is_air_force = models.BooleanField(default = False)
+    is_air_force = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
 
