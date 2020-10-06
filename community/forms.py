@@ -8,7 +8,7 @@ class PostForm(forms.ModelForm):
         choices=[(choice.pk, choice) for choice in Service.objects.all()])
     class Meta:
         model = Post
-        fields = ('title','text')
+        fields = ('title','text','service')
 
 
 class CommentForm(forms.ModelForm):
