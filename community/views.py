@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.utils import timezone
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Post, Comment
@@ -8,10 +7,12 @@ from datetime import date
 
 def post_list(request):
     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
-    return render(request, 'community/post_list.html', {'posts':posts})
+    return render(request, 'community/post_list.html', {'posts': posts})
+
 
 def prepare(request):
     return render(request, 'community/prepare.html')
+
 
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
@@ -27,7 +28,8 @@ def post_detail(request, pk):
             return redirect('post_detail', pk=post.id)
     else:
         form = CommentForm(request.POST)
-    return render(request, 'community/post_detail.html', {'post': post, 'comments':comments, 'form' : form})
+    return render(request, 'community/post_detail.html',
+                  {'post': post, 'comments': comments, 'form': form})
 
 
 def calendar(request):
@@ -36,13 +38,14 @@ def calendar(request):
 
 def post_new(request):
     if request.method == "POST":
-       form = PostForm(request.POST)
-       if form.is_valid() and request.user.is_authenticated:
-           post = form.save(commit=False)
-           post.published_date = timezone.now()
-           post.author = request.user
-           post.save()
-           return redirect('post_list')
+        form = PostForm(request.POST)
+        if form.is_valid() and request.user.is_authenticated:
+            post = form.save(commit=False)
+            post.published_date = timezone.now()
+            post.service = form.service
+            post.author = request.user
+            post.save()
+            return redirect('post_list')
     else:
         form = PostForm()
     return render(request, 'community/post_edit.html', {'form': form})
@@ -67,12 +70,14 @@ def comment_list(post):
     comments = Comment.objects.filter(post=post).order_by('-published_date')
     return comments
 
+
 def left_day(request):
     d_start = date(2019, 9, 2)
     d_fin = date(2021, 6, 16)
     d_delta = d_start-d_fin
     return render(request, 'community/left_day.html', {'leftday': d_delta})
 
+
 def cutline(request):
-    data = [100,200,100,100,120,130,152,164,132]
-    return render(request, 'community/cutline.html', {'data':data})
+    data = [100, 200, 100, 100, 120, 130, 152, 164, 132]
+    return render(request, 'community/cutline.html', {'data': data})

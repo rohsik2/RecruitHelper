@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from serviceapply.models import Service
 import RecruitHelper.settings as settings
 
 
@@ -9,6 +10,7 @@ class Post(models.Model):
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     published_date = models.DateTimeField(blank=True, null=True)
+    service = models.CharField(max_length=50)
 
     def publish(self):
         self.published_date = timezone.now()

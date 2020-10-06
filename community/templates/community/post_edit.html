@@ -1,5 +1,6 @@
 {% extends 'community/base.html' %}
-
+{% load static %}
+<link type="text/css" rel="stylesheet" href="{% static 'css/post_edit.css'%}"  media="screen,projection"/>
 <a href="{% url 'post_new' %}" class="top-menu"><i class="material-icons">edit</i></a>
 {% block content%}
 	<h3>전파사항 추가</h3>
