@@ -7,9 +7,20 @@ from serviceapply.models import Service
 class PostForm(forms.ModelForm):
     service = forms.ChoiceField(
         choices=[(choice.pk, choice) for choice in Service.objects.all()])
+    work_hardness = forms.IntegerField(
+        widget=forms.NumberInput(attrs={'type':'range', 'step': '1', 'min' : '1', 'max':'10'}))
+    work_happyness = forms.IntegerField(
+        widget=forms.NumberInput(attrs={'type':'range', 'step': '1', 'min' : '1', 'max':'10'}))
+    work_env = forms.IntegerField(
+        widget=forms.NumberInput(attrs={'type':'range', 'step': '1', 'min' : '1', 'max':'10'}))
+    night_work_frequency = forms.IntegerField(
+        widget=forms.NumberInput(attrs={'type':'range', 'step': '1', 'min' : '1', 'max':'10'}))
+    self_dev = forms.IntegerField(
+        widget=forms.NumberInput(attrs={'type':'range', 'step': '1', 'min' : '1', 'max':'10'}))
+
     class Meta:
         model = Post
-        fields = ('title', 'text', 'service')
+        fields = ('title', 'text', 'service','work_hardness', 'work_happyness', 'work_env', 'night_work_frequency', 'self_dev')
 
 
 class CommentForm(forms.ModelForm):

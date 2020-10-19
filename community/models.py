@@ -11,7 +11,12 @@ class Post(models.Model):
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     published_date = models.DateTimeField(blank=True, null=True)
     service = models.CharField(max_length=50)
-
+    like = models.IntegerField(default=0)
+    work_hardness = models.IntegerField(default=5)
+    work_happyness = models.IntegerField(default=5)
+    work_env = models.IntegerField(default=5)
+    night_work_frequency = models.IntegerField(default=5)
+    self_dev = models.IntegerField(default=5)
     def publish(self):
         self.published_date = timezone.now()
         self.save()

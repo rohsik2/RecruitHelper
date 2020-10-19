@@ -15,7 +15,7 @@ def service_detail(request, pk):
     data = []
     for cutline in cutlines:
         temp = str(cutline.date)
-        date.append(int(temp[5:7]))
+        date.append(int(temp[5:7])) #년, 월만 넣습니다.
         data.append(cutline.score)
     return render(request, 'serviceapply/service_detail.html', {'service': service, 'datas': data, 'dates':date})
 

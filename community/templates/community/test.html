@@ -1,0 +1,28 @@
+<html>
+<head>
+<title>Your title</title>
+
+</head>
+    
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script> 
+<script>
+function myFun() {
+    
+    $.get('{% url "test2" %}',{},function(ret) {
+        
+        $('#results').html("<div>Oops!</div>");
+        
+        return ret;//you can handle with return value ret here
+        
+            });
+}
+</script>
+    
+    <button onClick="myFun();">
+        갸아앙ㄱ
+    </button>
+    
+    <div id="results">
+        타란
+    </div>
+<body>

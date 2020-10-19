@@ -1,13 +1,20 @@
 from django.utils import timezone
+from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Post, Comment
 from .forms import PostForm, CommentForm
 from datetime import date
+from serviceapply.models import Service
 
 
-def post_list(request):
-    posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
-    return render(request, 'community/post_list.html', {'posts': posts})
+def mainpage(request):
+    return render(request, 'community/mainpage.html')
+
+
+def post_list(request, service="공군 전산병"):
+    services = Service.objects.all()
+    posts = Post.objects.filter(service=service).order_by('-published_date')
+    return render(request, 'community/post_list.html', {'posts': posts, 'services': services})
 
 
 def prepare(request):
@@ -32,17 +39,19 @@ def post_detail(request, pk):
                   {'post': post, 'comments': comments, 'form': form})
 
 
-def calendar(request):
-    return render(request, 'community/calendar.html')
-
-
 def post_new(request):
     if request.method == "POST":
         form = PostForm(request.POST)
         if form.is_valid() and request.user.is_authenticated:
+            print(form.cleaned_data['work_hardness'])
             post = form.save(commit=False)
             post.published_date = timezone.now()
             post.service = form.cleaned_data['service']
+            post.work_hardness = form.cleaned_data['work_hardness']
+            post.work_happyness = form.cleaned_data['work_happyness']
+            post.work_env = form.cleaned_data['work_env']
+            post.night_work_frequency = form.cleaned_data['night_work_frequency']
+            post.self_dev = form.cleaned_data['self_dev']
             post.author = request.user
             post.save()
             return redirect('post_list')
@@ -56,28 +65,41 @@ def post_edit(request, pk):
     if request.method == "POST":
         form = PostForm(request.POST, instance=post)
         if form.is_valid() and request.user.is_authenticated:
+            print(form.cleaned_data['work_hardness'])
             post = form.save(commit=False)
-            post.author = request.user
             post.published_date = timezone.now()
+            post.service = form.cleaned_data['service']
+            post.work_hardness = form.cleaned_data['work_hardness']
+            post.work_happyness = form.cleaned_data['work_happyness']
+            post.work_env = form.cleaned_data['work_env']
+            post.night_work_frequency = form.cleaned_data['night_work_frequency']
+            post.self_dev = form.cleaned_data['self_dev']
+            post.author = request.user
             post.save()
-            return redirect(post_list)
+            return redirect('post_list')
     else:
         form = PostForm(instance=post)
     return render(request, 'community/post_edit.html', {'form': form})
 
-
+def post_like(request, pk=1):
+    user_input = request.GET.get('value')
+    post = get_object_or_404(Post, pk=pk)
+    if request.method == "GET":
+        post.like = post.like+1
+        post.save()
+    return HttpResponse(post.like)
+    
 def comment_list(post):
     comments = Comment.objects.filter(post=post).order_by('-published_date')
     return comments
 
-
-def left_day(request):
-    d_start = date(2019, 9, 2)
-    d_fin = date(2021, 6, 16)
-    d_delta = d_start-d_fin
-    return render(request, 'community/left_day.html', {'leftday': d_delta})
+def test(request):
+    user_input = request.GET.get('value')
+    #put your code here
+    return HttpResponse('what you want to output to web')
 
 
-def cutline(request):
-    data = [100, 200, 100, 100, 120, 130, 152, 164, 132]
-    return render(request, 'community/cutline.html', {'data': data})
+def test(request):
+    user_input = request.GET.get('value')
+    #put your code here
+    return render(request, "community/test2.html");
