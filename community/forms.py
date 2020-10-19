@@ -8,15 +8,15 @@ class PostForm(forms.ModelForm):
     service = forms.ChoiceField(
         choices=[(choice.pk, choice) for choice in Service.objects.all()])
     work_hardness = forms.IntegerField(
-        widget=forms.NumberInput(attrs={'type':'range', 'step': '1', 'min' : '1', 'max':'10'}))
+        widget=forms.NumberInput(attrs={'type':'range', 'step': '1', 'min' : '1', 'max':'9'}))
     work_happyness = forms.IntegerField(
-        widget=forms.NumberInput(attrs={'type':'range', 'step': '1', 'min' : '1', 'max':'10'}))
+        widget=forms.NumberInput(attrs={'type':'range', 'step': '1', 'min' : '1', 'max':'9'}))
     work_env = forms.IntegerField(
-        widget=forms.NumberInput(attrs={'type':'range', 'step': '1', 'min' : '1', 'max':'10'}))
+        widget=forms.NumberInput(attrs={'type':'range', 'step': '1', 'min' : '1', 'max':'9'}))
     night_work_frequency = forms.IntegerField(
-        widget=forms.NumberInput(attrs={'type':'range', 'step': '1', 'min' : '1', 'max':'10'}))
+        widget=forms.NumberInput(attrs={'type':'range', 'step': '1', 'min' : '1', 'max':'9'}))
     self_dev = forms.IntegerField(
-        widget=forms.NumberInput(attrs={'type':'range', 'step': '1', 'min' : '1', 'max':'10'}))
+        widget=forms.NumberInput(attrs={'type':'range', 'step': '1', 'min' : '1', 'max':'9'}))
 
     class Meta:
         model = Post

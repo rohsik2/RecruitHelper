@@ -14,7 +14,24 @@ def mainpage(request):
 def post_list(request, service="공군 전산병"):
     services = Service.objects.all()
     posts = Post.objects.filter(service=service).order_by('-published_date')
-    return render(request, 'community/post_list.html', {'posts': posts, 'services': services})
+    work_hardness =0
+    work_happyness = 0
+    work_env = 0
+    night_work_frequency = 0
+    self_dev = 0
+    for post in posts:
+        work_hardness += post.work_hardness
+        work_happyness += post.work_happyness
+        work_env += post.work_env
+        night_work_frequency += post.night_work_frequency
+        self_dev = post.self_dev
+    work_env /= len(posts)
+    work_happyness /= len(posts)
+    work_hardness /= len(posts)
+    night_work_frequency /= len(posts)
+    self_dev /= len(posts)
+    datas = [work_hardness, work_happyness, work_env, night_work_frequency, self_dev]
+    return render(request, 'community/post_list.html', {'posts': posts, 'services': services, "datas":datas})
 
 
 def prepare(request):
