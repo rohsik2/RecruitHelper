@@ -24,13 +24,14 @@ def post_list(request, service="공군 전산병"):
         work_happyness += post.work_happyness
         work_env += post.work_env
         night_work_frequency += post.night_work_frequency
-        self_dev = post.self_dev
-    work_env /= len(posts)
-    work_happyness /= len(posts)
-    work_hardness /= len(posts)
-    night_work_frequency /= len(posts)
-    self_dev /= len(posts)
-    datas = [work_hardness, work_happyness, work_env, night_work_frequency, self_dev]
+        self_dev += post.self_dev
+    if(len(posts) != 0):
+        work_env /= len(posts)
+        work_happyness /= len(posts)
+        work_hardness /= len(posts)
+        night_work_frequency /= len(posts)
+        self_dev /= len(posts)
+        datas = [work_hardness, work_happyness, work_env, night_work_frequency, self_dev]
     return render(request, 'community/post_list.html', {'posts': posts, 'services': services, "datas":datas})
 
 
